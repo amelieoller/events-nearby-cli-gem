@@ -33,7 +33,11 @@ class EventsNearby::CLI
             event = EventsNearby::Events.all[input.to_i - 1]
             puts ""
             puts "--- #{event.formatted_event} ---"
-            puts event.content
+            if event.content != ""
+                puts event.content
+            else
+                puts "There seems to be no description of this event."
+            end
             puts ""
             menu
         elsif input == "list"
