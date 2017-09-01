@@ -6,7 +6,7 @@ class EventsNearby::Scraper
         @url = url
     end
 
-    def scrape_event(url)
+    def scrape_event
         @doc = Nokogiri::HTML(open(@url))
         @doc.search(".js-xd-read-more-contents").text
     end

@@ -18,7 +18,10 @@ class EventsNearby::CLI
 
     def list_events(city)
         puts "These are the upcoming events for #{city}:"
-        puts EventsNearby::Events.today
+        EventsNearby::Events.today
+        EventsNearby::Events.all.each_with_index do |event, i|
+            puts "#{i+1}. #{event.name}"
+        end
         menu
     end
 
