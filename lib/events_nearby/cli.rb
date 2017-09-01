@@ -3,6 +3,7 @@
 class EventsNearby::CLI
 
     def call
+        EventsNearby::Events.today        
         choose_city
     end
 
@@ -14,7 +15,7 @@ class EventsNearby::CLI
 
     def list_events(city)
         puts "These are the upcoming events for #{city}:"
-        EventsNearby::Events.today
+        
         EventsNearby::Events.all.each_with_index do |event, i|
             puts "#{i+1}. #{event.formatted_event}"
         end
@@ -65,7 +66,7 @@ class EventsNearby::CLI
         when "menu"
             menu
         when "start"
-            call
+            choose_city
         else
             puts "Not sure what you mean. Enter 'menu' to pick another event, 'start' to start over, or 'exit'."
             decision(gets.strip)
