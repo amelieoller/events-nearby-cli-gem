@@ -1,5 +1,4 @@
-require "events_nearby/version"
+require_relative '../config/environment'
 
 module EventsNearby
-  # Your code goes here...
 end

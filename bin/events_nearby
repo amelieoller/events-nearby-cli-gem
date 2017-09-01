@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+# Load files
+require_relative '../config/environment'
+
+EventsNearby::CLI.new.call

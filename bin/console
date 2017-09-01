@@ -10,5 +10,10 @@ require "events_nearby"
 # require "pry"
 # Pry.start
 
+# Method to reload environment
+def reload!
+    load_all './lib'
+end
+
 require "irb"
 IRB.start
