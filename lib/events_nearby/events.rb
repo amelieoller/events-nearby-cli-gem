@@ -1,6 +1,6 @@
 class EventsNearby::Events
 
-    attr_accessor :name
+    attr_accessor :name, :date, :price, :url
 
     @@all = []
 
