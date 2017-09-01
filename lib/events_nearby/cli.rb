@@ -3,13 +3,14 @@
 class EventsNearby::CLI
 
     def call
-        EventsNearby::Events.today        
+                
         choose_city
     end
 
     def choose_city
-        puts "What city would you like to see events nearby?"
+        puts "What city would you like to see events nearby? (e.g. 'San Francisco, CA')"
         input = gets.strip.downcase
+        EventsNearby::Events.today(input)
         input == "exit" ? goodbye : list_events(input)
     end
 

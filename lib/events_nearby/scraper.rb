@@ -11,8 +11,19 @@ class EventsNearby::Scraper
         @doc.search(".js-xd-read-more-contents p").text.strip[0..300].gsub(/\s\w+\s*$/,'...')
     end
 
-    def scrape_events
-        @doc = Nokogiri::HTML(open("https://www.eventbrite.com/d/ca--san-francisco/events/"))
+    def include_location_in_url(location)
+        data = location.split(/[\s,]+/)
+        state = data.last.gsub(/[^0-9A-Za-z]/, '')
+        city_array = data.first data.size - 1        
+        city = city_array.collect do |item|
+            item.gsub(/[^0-9A-Za-z]/, '')
+        end.join("-")
+        url = "https://www.eventbrite.com/d/#{state}--#{city}/events/"
+        scrape_events(url)
+    end
+
+    def scrape_events(url)
+        @doc = Nokogiri::HTML(open("#{url}"))
         @doc.search("div.js-event-list-container div.list-card-v2").each do |event_item|
             event = EventsNearby::Events.new
 

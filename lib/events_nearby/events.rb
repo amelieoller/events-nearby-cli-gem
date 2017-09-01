@@ -12,8 +12,8 @@ class EventsNearby::Events
         @@all
     end
 
-    def self.today
-        EventsNearby::Scraper.new.scrape_events
+    def self.today(input)
+        EventsNearby::Scraper.new.include_location_in_url(input)
     end
 
     def content
