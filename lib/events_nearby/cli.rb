@@ -29,8 +29,10 @@ class EventsNearby::CLI
         puts "Which event would you like to know more about? Enter a number or 'exit'"
         input = gets.strip
 
-        if input.to_i.between?(1,5)  # Put events.all.size for how many events are in the array
-            puts "The selected event"
+        if input.to_i.between?(1, EventsNearby::Events.all.size)
+            event = EventsNearby::Events.all[input.to_i - 1]
+            puts "--- #{event.name}"
+            puts event.content
         elsif input == "list"
             list_events
         else

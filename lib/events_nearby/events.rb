@@ -1,6 +1,6 @@
 class EventsNearby::Events
 
-    attr_accessor :name, :date, :price, :url
+    attr_accessor :name, :date, :price, :url, :content
 
     @@all = []
 
@@ -14,6 +14,10 @@ class EventsNearby::Events
 
     def self.today
         EventsNearby::Scraper.new.scrape_events
+    end
+
+    def content
+        @content ||= EventsNearby::Scraper.new(url).scrape_event
     end
 
 end
