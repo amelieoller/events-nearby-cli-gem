@@ -8,7 +8,7 @@ class EventsNearby::Scraper
 
     def scrape_event
         @doc = Nokogiri::HTML(open(@url))
-        @doc.search(".js-xd-read-more-contents").text.strip
+        @doc.search(".js-xd-read-more-contents p").text.strip[0..300].gsub(/\s\w+\s*$/,'...')
     end
 
     def scrape_events
@@ -17,12 +17,26 @@ class EventsNearby::Scraper
             event = EventsNearby::Events.new
 
             event.name = event_item.search(".list-card__title").first.text.gsub("\n", "").strip
-            event.date = event_item.search(".list-card__date").first.text.gsub("\n", "").strip
+            event.date = event_item.search(".list-card__date").first.text.gsub("\n", "").strip.split.join(" ")
             event.price = event_item.search(".list-card__label").first.text.strip
             event.url = event_item.attr("data-share-url").strip
 
             event.save
         end
+    end
+
+    def truncate(truncate_at, options = {})
+        return dup unless length > truncate_at
+    
+        options[:omission] ||= '...'
+        length_with_room_for_omission = truncate_at - options[:omission].length
+        stop =        if options[:separator]
+            rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
+        else
+            length_with_room_for_omission
+        end
+    
+        "#{self[0...stop]}#{options[:omission]}"
     end
     
 end

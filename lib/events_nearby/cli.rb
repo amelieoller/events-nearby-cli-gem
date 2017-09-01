@@ -20,7 +20,7 @@ class EventsNearby::CLI
         puts "These are the upcoming events for #{city}:"
         EventsNearby::Events.today
         EventsNearby::Events.all.each_with_index do |event, i|
-            puts "#{i+1}. #{event.name}"
+            puts "#{i+1}. #{event.formatted_event}"
         end
         menu
     end
@@ -31,8 +31,11 @@ class EventsNearby::CLI
 
         if input.to_i.between?(1, EventsNearby::Events.all.size)
             event = EventsNearby::Events.all[input.to_i - 1]
-            puts "--- #{event.name}"
+            puts ""
+            puts "--- #{event.formatted_event} ---"
             puts event.content
+            puts ""
+            menu
         elsif input == "list"
             list_events
         else

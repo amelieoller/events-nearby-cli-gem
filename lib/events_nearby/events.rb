@@ -20,4 +20,8 @@ class EventsNearby::Events
         @content ||= EventsNearby::Scraper.new(url).scrape_event
     end
 
+    def formatted_event
+        "#{self.name} | #{self.date} | #{self.price}"
+    end
+
 end
