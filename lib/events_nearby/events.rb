@@ -25,7 +25,7 @@ class EventsNearby::Events
     end
 
     def open_in_browser
-        system("open '#{url}'")
+        system("xdg-open '#{url}'")
     end
 
 end
