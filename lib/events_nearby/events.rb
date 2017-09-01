@@ -24,4 +24,8 @@ class EventsNearby::Events
         "#{self.name} | #{self.date} | #{self.price}"
     end
 
+    def open_in_browser
+        system("open '#{url}'")
+    end
+
 end

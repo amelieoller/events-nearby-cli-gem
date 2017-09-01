@@ -35,8 +35,23 @@ class EventsNearby::CLI
             puts "--- #{event.formatted_event} ---"
             if event.content != ""
                 puts event.content
+                puts "Would you like to open this event in your browser?"
+                input = gets.strip
+                if ["y", 'yes'].include?(input.downcase)
+                    event.open_in_browser
+                else
+                    menu
+                end
             else
-                puts "There seems to be no description of this event."
+                puts "There seems to be no description of this event. Would you like to open this event in your browser?"
+                input = gets.strip
+                if ["y", 'yes'].include?(input.downcase)
+                    event.open_in_browser
+                elsif input == "exit"
+                    goodbye
+                else
+                    menu
+                end
             end
             puts ""
             menu
