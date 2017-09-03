@@ -13,12 +13,21 @@ class EventsNearby::Scraper
 
     def include_location_in_url(location)
         data = location.split(/[\s,]+/)
-        state = data.last.gsub(/[^0-9A-Za-z]/, '')
-        city_array = data.first data.size - 1        
+
+        if location.include?(",")
+            state = data.last.gsub(/[^0-9A-Za-z]/, '')
+            city_array = data.first data.size - 1
+        else
+            city_array = data
+        end
+        
         city = city_array.collect do |item|
             item.gsub(/[^0-9A-Za-z]/, '')
-        end.join("-")
+        end.join("-")e
+
         url = "https://www.eventbrite.com/d/#{state}--#{city}/events/"
+        binding.pry
+        
         scrape_events(url)
     end
 

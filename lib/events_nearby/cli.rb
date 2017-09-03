@@ -51,7 +51,7 @@ class EventsNearby::CLI
     end
 
     def open_in_browser_decision(input, event)
-        if ["y", 'yes'].include?(input.downcase)
+        if ['y', 'yes', 'open'].include?(input.downcase)
             event.open_in_browser
             puts ""
             menu
