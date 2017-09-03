@@ -12,6 +12,10 @@ class EventsNearby::Events
         @@all
     end
 
+    def self.destroy_all
+        self.all.clear
+    end
+
     def self.today(input)
         EventsNearby::Scraper.new.include_location_in_url(input)
     end
