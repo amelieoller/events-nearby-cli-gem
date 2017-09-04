@@ -2,7 +2,7 @@
 require 'require_all'
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
+# require 'pry'
 
 # Load files
 require_all './lib'
