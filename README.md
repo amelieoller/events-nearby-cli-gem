@@ -1,8 +1,6 @@
 # EventsNearby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/events_nearby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to 'Events Nearby'! In this directory, you'll find a CLI Ruby Gem. 'Events Nearby' lets you enter any location to retrieve a list of events that are near that location. Displayed will be the name of the events, when they are taking place, where exactly they are, and how much they cost. You can then choose one of the listed events to see details about that event and even open it in your browser.
 
 ## Installation
 
@@ -22,13 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+- Start the program
+- Enter the location you want to see events nearby
+- Enter a number to see more details about a specific event
+- Open the chosen event in your browser if you wish or start over
 
 ## Contributing
 
@@ -38,4 +33,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
