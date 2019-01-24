@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-# Load files
-require_relative '../config/environment'
+# Load our environment
+require_relative '../lib/environment'
 
-EventsNearby::CLI.new.call
+# Create new CLI instance and call choose_city to start app
+EventsNearby::CLI.new.choose_city

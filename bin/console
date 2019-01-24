@@ -2,7 +2,7 @@
 
 # require "bundler/setup"
 # require "events_nearby"
-require_relative '../config/environment'
+require_relative '../lib/environment'
 
 
 # You can add fixtures and/or initialization code here to make experimenting
