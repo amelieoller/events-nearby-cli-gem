@@ -1,90 +1,83 @@
 # CLI Controller
-
 class EventsNearby::CLI
-
-	def call
-		choose_city
-	end
-
+	# Ask user for city input, find or create new city and set @city instance variable
 	def choose_city
 		puts "What city would you like to see events nearby? (e.g. 'San Francisco, CA')"
+
 		input = gets.strip.downcase
 		parsed_input = EventsNearby::City.parse_city_input(input)
 		name = parsed_input[:name]
 		state = parsed_input[:state]
 
 		if EventsNearby::City.find_by(name, state)
-			city = EventsNearby::City.find_by(name, state)
+			@city = EventsNearby::City.find_by(name, state)
+			list_events
 		else
-			city = EventsNearby::City.new(name, state)
-			EventsNearby::Scraper.new.scrape_events(city)
+			@city = EventsNearby::Scraper.new.scrape_events(name, state)
+			@city == false ? choose_city : list_events
 		end
-
-		input == "exit" ? goodbye : list_events(city)
 	end
 
-	def list_events(city)
-		puts "These are the upcoming events for #{city.name}:"
+	def list_events
+		separator
+		puts "These are the upcoming events for #{@city.name.bold}:".red
+		separator
 
-		EventsNearby::Event.all.each_with_index do |event, i|
-			puts "#{i+1}. #{event.formatted_event}"
+		@city.events.each_with_index do |event, i|
+			puts "#{i+1}. #{event.format_event}"
 		end
+
 		menu
 	end
 
 	def menu
-		puts "Which event would you like to know more about? Enter a number, 'start' to start over, or 'exit'."
+		separator
+		puts "What would you like to do next?"
+		puts "- Pick an event by entering a number".bold
+		puts "- Type " + "'city'".bold + " to choose a new city"
+		puts "- Type " + "'list'".bold + " to list all events again"
+		puts "- Type " + "'exit'".bold + " to exit"
+		separator
+
 		input = gets.strip
-		if input.to_i.between?(1, EventsNearby::Event.all.size)
-			event = EventsNearby::Event.all[input.to_i - 1]
+
+		if input == "exit"
+			puts "See you later!"
+		elsif input == "list"
+			list_events
+		elsif input == "city"
+			choose_city
+		elsif input.to_i.between?(1, @city.events.size)
+			event = @city.events[input.to_i - 1]
 			EventsNearby::Scraper.new.scrape_event(event) unless event.content
 			show_details(event)
 		else
-			decision(input)
+			puts "Not sure what you mean..."
+			menu
 		end
 	end
 
 	def show_details(event)
 		puts ""
-		puts "--- #{event.formatted_event} ---"
-		if event.content != ""
-			puts event.content
-			puts ""
-			puts "Would you like to open this event in your browser? Enter 'yes' to open, 'menu' to pick another event, 'start' to start over, or 'exit'."
-			input = gets.strip
-			open_in_browser_decision(input, event)
-		else
-			puts "There seems to be no description of this event. Would you like to open this event in your browser? Enter 'yes' to open, 'menu' to pick another event, 'start' to start over, or 'exit'."
-			input = gets.strip
-			open_in_browser_decision(input, event)
-		end
-	end
+		puts "--- #{event.format_event} ---".green
+		puts event.content
+		puts ""
+		separator
+		puts "Would you like to open this event in your browser? #{'yes'.bold} or #{'no'.bold}?"
+		separator
 
-	def open_in_browser_decision(input, event)
-		if ['y', 'yes', 'open'].include?(input.downcase)
+		input = gets.strip.downcase
+
+		if ["y", "yes", "open"].include?(input)
 			event.open_in_browser
 			puts ""
 			menu
 		else
-			decision(input)
-		end
-	end
-
-	def decision(input)
-		case input
-		when "exit"
-			goodbye
-		when "menu"
 			menu
-		when "start"
-			choose_city
-		else
-			puts "Not sure what you mean. Enter 'menu' to pick another event, 'start' to start over, or 'exit'."
-			decision(gets.strip)
 		end
 	end
 
-	def goodbye
-		puts "See you later!"
+	def separator
+		puts "--------------**********--------------".red
 	end
 end
