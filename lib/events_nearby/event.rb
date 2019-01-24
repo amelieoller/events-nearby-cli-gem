@@ -1,9 +1,14 @@
 # Event model
 class EventsNearby::Event
-	attr_accessor :name, :date, :price, :url, :content, :city
+	attr_accessor :name, :date, :price, :url, :city, :content
 	@@all = []
 
-	def initialize
+	def initialize(name, date, price, url, city)
+		@name = name
+		@date = date
+		@price = price
+		@url = url
+		@city = city
 		@@all << self
 	end
 
@@ -11,11 +16,11 @@ class EventsNearby::Event
 		@@all
 	end
 
-	def formatted_event
+	def format_event
 		"#{self.name} | #{self.date} | #{self.price}"
 	end
 
 	def open_in_browser
-		system("xdg-open '#{url}'")
+		Launchy.open(url)
 	end
 end
