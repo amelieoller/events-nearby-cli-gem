@@ -1,8 +1,15 @@
-# EventsNearby
-
+# Events Nearby
 Welcome to 'Events Nearby'! In this directory, you'll find a CLI Ruby Gem. 'Events Nearby' lets you enter any location to retrieve a list of events that are near that location. Displayed will be the name of the events, when they are taking place, where exactly they are, and how much they cost. You can then choose one of the listed events to see details about that event and even open it in your browser.
 
-## Installation
+## Installation/Running the Application
+
+### Option 1: Clone the Repository and Run It Directly
+1. Clone this repository: `git clone https://github.com/amelieoller/events-nearby-cli-gem.git`
+2. `cd` into the cloned directory
+3. Run `bundle install` in your terminal
+4. Then run the application with `bin/events_nearby`
+
+### Option 2: Add the Gem to Your Gemfile
 
 Add this line to your application's Gemfile:
 
@@ -10,13 +17,12 @@ Add this line to your application's Gemfile:
 gem 'events_nearby'
 ```
 
-And then execute:
+And then run `bundle`
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install events_nearby
+### Option 3: Install It Yourself
+```bash
+gem install events_nearby
+```
 
 ## Usage
 
