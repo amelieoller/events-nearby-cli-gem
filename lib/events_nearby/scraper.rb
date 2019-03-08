@@ -9,7 +9,7 @@ class EventsNearby::Scraper
 		city = EventsNearby::City.new(name, state)
 
 		doc.search(".search-event-card-wrapper").each do |event_data|
-			name = event_data.search(".card-text--truncated__three").text.strip
+			name = event_data.search(".event-card__formatted-name--is-clamped").text.strip
 			url = event_data.search(".eds-media-card-content__action-link").attr('href').value
 			date = event_data.search(".eds-text-bs--fixed")[0].text
 			price = event_data.search(".eds-text-bs--fixed")[2].text
