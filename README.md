@@ -1,5 +1,7 @@
 # Events Nearby
-Welcome to 'Events Nearby'! In this directory, you'll find a CLI Ruby Gem. 'Events Nearby' lets you enter any location to retrieve a list of events that are near that location. Displayed will be the name of the events, when they are taking place, where exactly they are, and how much they cost. You can then choose one of the listed events to see details about that event and even open it in your browser.
+Welcome to 'Events Nearby'! This repository contains a Ruby CLI (Command Line Interface) Gem. 'Events Nearby' lets you enter any location to retrieve a list of events that are near that location. Displayed will be the name of the events, when they are taking place, and how much they cost. You can then choose one of the listed events to see details about that event and open it in your browser.
+
+![Events Nearby Walkthrough](./events-nearby-walkthrough.gif)
 
 ## Installation/Running the Application
 
